@@ -1,0 +1,44 @@
+  <html>
+            <head>
+                <title>Piazza</title>
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            </head>
+            <body>
+                <div class = fluid>
+                    <center><h2>Welcome </h2></center>
+                </div>
+            <div class="row">
+            <div class="cols lg-4">
+                <font face="Comic Sans Ms">
+                <div class=jumbotron>
+                {% if all_thread %}
+                <ol>
+                    {% for thread in all_thread%}
+                        <li><a href="/forum/{{thread.id}}/">{{thread.subject}}</a></li>
+                    {% endfor %}
+                </ol>   
+                {% else %}
+                    <h3> you dont have any threads</h3>
+                {% endif %}
+                </font>
+                <div>
+                <a href="{% url 'forum:thread-add'%}"> <button type="button" class="btn btn-primary">Add Thread</button></a>
+                </div>
+            </div>
+            </div>
+            <div class="cols lg-8">
+                {{thread1.value}}
+                <br>
+                <b>Comments:-</b>
+                <ol>
+                        {% for comment in thread1.comment_set.all%}
+                
+                            
+                                         <li>{{comment.comment}}</li>
+                            
+                        {% endfor %}
+                    </ol>   
+                </div>
+            </div>
+            </body>
+            </html>
