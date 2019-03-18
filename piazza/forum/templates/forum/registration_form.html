@@ -1,0 +1,19 @@
+<div>
+    <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+        {% for field in form %}
+        <div class ="form-group">
+            <span class ="text-danger"> {{field.errors}}</span>
+        </div>
+        <label class="control-label">{{field.label_tag}}</label>
+        <div>{{ field }}</div>
+    {% endfor %}
+    <div class ="form-group">
+        <button type="submit">Submit</button>
+    </div>
+    </form>
+    </div>
+    <div>
+        if you already have a account then click here
+        <a href="{% url 'forum:login'%}"> <button type="button" class="btn btn-primary">LOG IN</button></a>
+    </div>

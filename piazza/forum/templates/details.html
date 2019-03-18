@@ -2,11 +2,16 @@
             <head>
                 <title>Piazza</title>
                 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            
             </head>
             <body>
                 <div class = fluid>
                     <center><h2>Welcome </h2></center>
+                    <div align="right">
+                    <a href="/forum/logout/"> <button type="button" class="btn btn-primary">LOG OUT--</button></a>
+                    </div>
                 </div>
+                Hello {{user.first_name}}
             <div class="row">
             <div class="cols lg-4">
                 <font face="Comic Sans Ms">
@@ -29,16 +34,40 @@
             <div class="cols lg-8">
                 {{thread1.value}}
                 <br>
+                {{thread1.timedays}}days,{{thread1.timehour}} hours and {{thread1.timeminutes}}minutes old.
+                <br>
+                --<b>{{thread1.author}}</b>
+                {% if thread1.author_type == 1 %}
+                    (A Student)
+                {% endif %}
+                {%if thread1.author_type == 2 %}
+                    (An Instructor)
+                {% endif %}
+                <br>
                 <b>Comments:-</b>
                 <ol>
                         {% for comment in thread1.comment_set.all%}
                 
-                            
-                                         <li>{{comment.comment}}</li>
+                                        
+                                         <li>{{comment.comment}}
+                                             <br>
+                                             --<b>{{comment.author}}</b>
+                                                    {% if comment.author_type == 1 %}
+                                                         (A Student)
+                                                    {% endif %}
+                                                    {%if comment.author_type == 2 %}
+                                                        (An Instructor)
+                                                    {% endif %}
+
+                                         </li>
                             
                         {% endfor %}
-                    </ol>   
+                    </ol>
+                    <div>
+                        <a href="/forum/{{thread1.id}}/add/"> <button type="button" class="btn btn-primary">Add comment</button></a>
+                    </div>
                 </div>
             </div>
+            
             </body>
             </html>
