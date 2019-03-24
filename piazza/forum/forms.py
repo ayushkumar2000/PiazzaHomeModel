@@ -17,3 +17,4 @@ class SuperUserForm(forms.ModelForm):
         model=User
         fields=['username','email','password','first_name','last_name']
         
+        

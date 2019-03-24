@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from .models import thread, comment
+from .models import thread, comment, resource
 from django.http import Http404
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -11,9 +11,12 @@ from django.contrib.auth.models import User
 from django.contrib.auth import logout
 from datetime import datetime, timezone
 
+#def resources(request):
+
+
 def index(request):
      
-    all_thread = thread.objects.all()
+    all_thread = thread.objects.all().order_by('-created')
     context={ 'all_thread' : all_thread ,'user': request.user}
     
     if request.user.is_authenticated():
@@ -30,7 +33,7 @@ def detail(request,thread_id):
 
     except:
         raise Http404("Thread doesnot exist")
-    all_thread = thread.objects.all()
+    all_thread = thread.objects.all().order_by('-created')
     all_comment= comment.objects.all()
     
     if request.user.is_authenticated():
@@ -64,6 +67,12 @@ class commentCreate(CreateView):
     model=comment
     
     fields=['comment']
+        # def get(self,request):
+            
+        #         form=self.form_class(None)
+        #         return render(request, self.template_name,{'form':form})
+        #     else:
+        #         return HttpResponse('<h2><font color="red"> You are not authorised to view this page</font></h2>') 
     def form_valid(self, form):
         obj = form.save(commit=False)
         obj.author = self.request.user

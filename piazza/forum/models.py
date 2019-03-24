@@ -34,4 +34,8 @@ class comment(models.Model):
     author_type = models.IntegerField()
     def __str__ (self):
         return str(self.Thread) + '-' + self.comment
-         
+class resource(models.Model):
+    rfile = models.FileField()
+    created = models.DateTimeField()
+    author = models.CharField(max_length=100)
+    
