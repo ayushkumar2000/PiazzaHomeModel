@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
+<div class="jumbotron" align="center">
+        <legend><center><h2><b>Add Resource</b></h2></center></legend><br>
+    <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+        {% for field in form %}
+        <div class ="form-group">
+            <span class ="text-danger"> {{field.errors}}</span>
+        </div>
+        <label class=" control-label">{{field.label_tag}}</label> &nbsp; &nbsp; <span align="center">{{ field }}</span    >
+         {% endfor %}
+    <br>
+    <br>
+         <div class ="form-group" >
+        <button type="submit" class="btn btn-success">  Submit  </button>
+        </div>
+    <br>
+    </form>
+
+    <div style="padding-left:10px">
+      
+        <a href="{% url 'forum:resources' %}"> <button type="button" class="btn btn-primary">  Go back to Resources</button></a>
+    </div>
+</div>
